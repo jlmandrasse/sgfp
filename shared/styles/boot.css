@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+:root {
+    --color-sgfp: #115071;
+    --color-sgfp-btn-text: #FFFFFF;
+    --color-sgfp-btn-border: #1A8ECE;
+    --color-green: #36BA9B;
+    --color-blue: #39AED9;
+    --color-yellow: #F5B946;
+    --color-red: #D94352;
+
+    --weight-bold: 700;
+    --weight-light: 300;
+    --weight-strong: 600;
+
+    --gradient-green: linear-gradient(to right, #42E695 0%, #3BB2B8 50%, #42E695 100%);
+
+    --hover-duration: 0.3s;
+    --hover-color-green: #61DDBC;
+
+    --radius-normal: 5px;
+    --radius-medium: 10px;
+
+    --index-modal: 4;
+}
+
+
+/*DEFAULT LOAD*/
+.ajax_load {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: calc(var(--index-modal) * 2);
+}
+
+.ajax_load_box {
+    margin: auto;
+    text-align: center;
+    color: #ffffff;
+    font-weight: var(--weight-bold);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.ajax_load_box_circle {
+    border: 16px solid #e3e3e3;
+    border-top: 16px solid var(--hover-color-green);
+    border-radius: 50%;
+    margin: auto;
+    width: 80px;
+    height: 80px;
+
+    -webkit-animation: spin 1.2s linear infinite;
+    -o-animation: spin 1.2s linear infinite;
+    animation: spin 1.2s linear infinite;
+}
+
+.ajax_load_box_title {
+    margin-top: 15px;
+    font-weight: var(--weight-strong);
+}
+
+.btn-auth {
+    position: relative;
+    z-index: 2;
+    background: var(--color-sgfp);
+    --bs-btn-padding-x: 0.75rem;
+    --bs-btn-padding-y: 0.375rem;
+    --bs-btn-font-size: 1rem;
+    --bs-btn-font-weight: 400;
+    --bs-btn-line-height: 1.5;
+    --bs-btn-border-width: 1px;
+    --bs-btn-border-color: transparent;
+    --bs-btn-border-radius: 0.375rem;
+    --bs-btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
+    --bs-btn-disabled-opacity: 0.65;
+    --bs-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--bs-btn-focus-shadow-rgb), .5);
+    display: inline-block;
+    padding: var(--bs-btn-padding-y) var(--bs-btn-padding-x);
+    font-family: var(--bs-btn-font-family);
+    font-size: var(--bs-btn-font-size);
+    font-weight: var(--bs-btn-font-weight);
+    line-height: var(--bs-btn-line-height);
+    color: var(--color-sgfp-btn-text);
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
+    border-radius: var(--bs-btn-border-radius);
+    background-color: var(--color-sgfp);
+}
+
+.btn-auth:focus {
+    color: var(--color-sgfp-btn-text);
+    background-color: var(--color-sgfp);
+    border: var(--color-sgfp-btn-border);
+    outline: 0;
+}
+
+.button-auth {
+    padding-bottom: 80px;
+}

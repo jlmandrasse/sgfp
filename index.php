@@ -6,15 +6,22 @@ require __DIR__."/vendor/autoload.php";
 /**
  * BOOTSTRAP
  */
-use CoffeeCode\Router\Router;
 
+use CoffeeCode\Router\Router;
+use Source\Core\Session;
+
+$session = new Session();
 $route = new Router(url(), ":");
+$route->namespace("Source\App");
 
 /**
  * WEB ROUTES
  */
-$route->namespace("Source\App");
+
+//auth
+$route->group(null);
 $route->get("/", "Web:login");
+$route->post("/", "Web:login");
 $route->get("/recuperar", "Web:forget");
 
 /**

@@ -1,7 +1,7 @@
-<?php $v->layout("_theme-error"); ?>
+<?php $v->layout("_theme"); ?>
 
 <article class="not_found">
-    <div class="container content">
+    <div class="container_error content">
         <header class="not_found_header">
             <p class="error">&bull;<?= $error->code; ?>&bull;</p>
             <h1><?= $error->title; ?></h1>
