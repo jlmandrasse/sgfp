@@ -26,7 +26,7 @@ class Web extends Controller
     public function login(?array $data): void
     {
         if (Auth::user()) {
-            redirect("/app");
+            redirect("/admin");
         }
 
         if (!empty($data['csrf'])) {
@@ -36,11 +36,11 @@ class Web extends Controller
                 return;
             }
 
-            if (request_limit("weblogin", 3, 60 * 5)) {
-                $json['message'] = $this->message->error("Você já efetuou 3 tentativas, esse é o limite. Por favor, aguarde 5 minutos para tentar novamente!")->render();
-                echo json_encode($json);
-                return;
-            }
+//            if (request_limit("weblogin", 3, 60 * 5)) {
+//                $json['message'] = $this->message->error("Você já efetuou 3 tentativas, esse é o limite. Por favor, aguarde 5 minutos para tentar novamente!")->render();
+//                echo json_encode($json);
+//                return;
+//            }
 
             if (empty($data['email']) || empty($data['password'])) {
                 $json['message'] = $this->message->warning("Informe seu email e senha para entrar")->render();
@@ -54,7 +54,7 @@ class Web extends Controller
 
             if ($login) {
                 $this->message->success("Seja bem-vindo(a) de volta " . Auth::user()->first_name . "!")->flash();
-                $json['redirect'] = url("/app");
+                $json['redirect'] = url("/admin");
             } else {
                 $json['message'] = $auth->message()->before("Ooops! ")->render();
             }

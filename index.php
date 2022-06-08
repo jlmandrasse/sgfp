@@ -24,6 +24,21 @@ $route->get("/", "Web:login");
 $route->post("/", "Web:login");
 $route->get("/recuperar", "Web:forget");
 
+//services
+$route->group(null);
+$route->get("/termos", "Web:terms");
+
+/**
+ * ADMIN ROUTES
+ */
+$route->namespace("Source\App\Admin");
+$route->group("/admin");
+
+//dash
+$route->get("/", "Dash:dash");
+$route->get("/dash/home", "Dash:home");
+$route->get("/logoff", "Dash:logoff");
+
 /**
  * ERROR ROUTES
  */
