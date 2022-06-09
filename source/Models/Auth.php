@@ -130,9 +130,9 @@ class Auth extends Model
         }
 
         if ($save) {
-            setcookie("authEmail", $email, time() + 604800, "/");
+            setcookie("authEmail", $email, time() + 604800, "/"); //cookie válido por uma semana
         } else {
-            setcookie("authEmail", null, time() - 3600, "/");
+            setcookie("authEmail", null, time() - 3600, "/"); //removendo o cookie
         }
 
         //LOGIN

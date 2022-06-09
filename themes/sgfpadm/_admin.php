@@ -19,8 +19,8 @@
 </div>
 
 <header>
-    <nav class="navbar navbar-light bg-info sgfp-color">
-        <a class="navbar-brand" href="#">
+    <nav class="navbar navbar-light" style="background: #6ba4ff">
+        <a class="navbar-brand fw-bold" href="<?= url("/admin"); ?>">
             <img src="<?= theme("/assets/images/sgfp.png"); ?>" width="30" height="30" class="d-inline-block align-top"
                  alt="">
             SGFP
@@ -37,18 +37,16 @@
 
 <footer>
     <div class="d-flex flex-column text-center text-md-start justify-content-between py-4 px-4 px-xl-5
-    footer-block fixed-bottom">
+    footer-block fixed-bottom" style="background: #5c9bff">
         <!-- Copyright -->
         <div class="row">
             <div class="<?php if (!empty($userName)): ?>col-md-9 <?php else: ?>col-md-10<?php endif; ?> text-white mb-3 mb-md-0">
                 Copyright &copy; 2022. Todos direitos reservados - <?= CONF_SITE_NAME ?>.
             </div>
-            <div class="<?php if (!empty($userName)): ?>col-md-3 <?php else: ?>col-md-2<?php endif; ?> mb-3 mb-md-0 float-end">
+            <div class="col-md-3 mb-3 mb-md-0 float-end">
                 <a href="<?= url("/") ?>" class="text-decoration-none text-white">&bull; Home</a>
                 <a href="<?= url("/termos") ?>" class="text-decoration-none text-white">&bull; Termos de uso</a>
-                <?php if (!empty($userName)): ?>
-                    <a href="<?= url("/admin/logoff") ?>" class="text-decoration-none text-white">&bull; Sair</a>
-                <?php endif; ?>
+                <a href="<?= url("/admin/logoff") ?>" class="text-decoration-none text-white">&bull; Sair</a>
             </div>
         </div>
         <!-- Copyright -->
