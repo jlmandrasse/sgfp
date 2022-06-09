@@ -43,7 +43,8 @@ class Dash extends Admin
         echo $this->view->render("home", [
             "app" => "dash",
             "head" => $head,
-            "userName" => $this->user->name
+            "userName" => $this->user->name,
+            "date" => date_fmt_mz()
         ]);
     }
 

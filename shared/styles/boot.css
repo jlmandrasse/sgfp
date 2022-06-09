@@ -1,3 +1,5 @@
+@import url('font-family-montserrat.css');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,6 +7,10 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
 }
 
 :root {
@@ -31,6 +37,17 @@
     --index-modal: 4;
 }
 
+.bg-sgfp {
+    background: var(--color-sgfp);
+}
+
+.bg-sgfp-nav-content {
+    background: #1a659a;
+}
+
+.justify-center {
+    margin: 0 16vh;
+}
 
 /*DEFAULT LOAD*/
 .ajax_load {

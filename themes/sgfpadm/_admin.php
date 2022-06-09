@@ -18,14 +18,50 @@
     </div>
 </div>
 
-<header>
-    <nav class="navbar navbar-light" style="background: #6ba4ff">
-        <a class="navbar-brand fw-bold" href="<?= url("/admin"); ?>">
-            <img src="<?= theme("/assets/images/sgfp.png"); ?>" width="30" height="30" class="d-inline-block align-top"
-                 alt="">
-            SGFP
-        </a>
-    </nav>
+<nav class="py-2 bg-sgfp border-bottom">
+    <div class="container d-flex flex-wrap">
+        <ul class="nav me-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link link-dark px-2 text-white fw-bold active" aria-current="page">
+                    Gestão de Finanças
+                </a>
+            </li>
+        </ul>
+        <ul class="nav">
+            <li class="nav-item">
+                <a href="#" class="nav-link link-dark px-2 text-white fw-bolder">
+                    <?= $date ?>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<header class="navbar navbar-expand-lg bg-sgfp-nav-content">
+    <div class="container-fluid d-inline">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-center">
+                <form>
+                    <div class="form-group">
+                        <select class="form-control form-select-sm" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <?php for ($i = 2022; $i <= 2030; $i++): ?>
+                                <option value="1"><?= $i ?></option>
+                            <?php endfor; ?>
+                        </select>
+                    </div>
+                </form>
+                <?php for ($i = 1; $i <= 12; $i++): ?>
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="#"><?= months($i) ?></a>
+                    </li>
+                <?php endfor; ?>
+            </ul>
+        </div>
+    </div>
 </header>
 
 <!--CONTENT-->
@@ -37,7 +73,7 @@
 
 <footer>
     <div class="d-flex flex-column text-center text-md-start justify-content-between py-4 px-4 px-xl-5
-    footer-block fixed-bottom" style="background: #5c9bff">
+    footer-block fixed-bottom bg-sgfp">
         <!-- Copyright -->
         <div class="row">
             <div class="<?php if (!empty($userName)): ?>col-md-9 <?php else: ?>col-md-10<?php endif; ?> text-white mb-3 mb-md-0">

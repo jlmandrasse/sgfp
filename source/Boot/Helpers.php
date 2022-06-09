@@ -220,3 +220,61 @@ function request_limit(string $key, int $limit = 5, int $seconds = 60): bool
 
     return false;
 }
+
+function months(string $month): string
+{
+    switch ($month) {
+        case 01:
+        case 1:
+            $month = "Janeiro";
+            break;
+        case 02:
+        case 2:
+            $month = "Fevereiro";
+            break;
+        case 03:
+        case 3:
+            $month = "Março";
+            break;
+        case 04:
+        case 4:
+            $month = "Abril";
+            break;
+        case 05:
+        case 5:
+            $month = "Maio";
+            break;
+        case 06:
+        case 6:
+            $month = "Junho";
+            break;
+        case 07:
+        case 7:
+            $month = "Julho";
+            break;
+        case '08':
+        case 8:
+            $month = "Agosto";
+            break;
+        case '09':
+        case 9:
+            $month = "Setembro";
+            break;
+        case 10:
+            $month = "Outubro";
+            break;
+        case 11:
+            $month = "Novembro";
+            break;
+        case 12:
+            $month = "Dezembro";
+            break;
+    }
+    return $month;
+}
+
+function date_fmt_mz(): string
+{
+    $date = "Hoje: " . date('d') . " de " . months(date('m')) . " de " . date('Y');
+    return $date;
+}

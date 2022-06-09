@@ -22,7 +22,7 @@
                     E-mail:</label>
                 <input type="email" name="email" id="email" value="<?= ($cookie ?? null); ?>"
                        class="form-control form-control-lg"
-                       placeholder="Ex: jlmandrasse@gmail.com"/>
+                       placeholder="Ex: jlmandrasse@gmail.com" required/>
             </div>
 
             <!-- Password input -->
@@ -30,7 +30,7 @@
                 <label class="form-label fw-bold sgfp-color" for="password"><i class="fas fa-unlock"></i>
                     Senha:</label>
                 <input type="password" name="password" id="password" class="form-control form-control-lg"
-                       placeholder="Ex: *************"/>
+                       placeholder="Ex: *************" required/>
             </div>
 
             <div class="d-flex justify-content-between align-items-center">

@@ -19,7 +19,7 @@
                 <span style="margin-left: 34.5vh"><a title="Recuperar senha" href="<?= url(); ?>"
                                                      class="text-decoration-none sgfp-color fw-bold">Voltar e entrar!</a></span>
                 <input type="email" id="email" class="form-control form-control-lg"
-                       placeholder="Ex: jlmandrasse@gmail.com"/>
+                       placeholder="Ex: jlmandrasse@gmail.com" required/>
             </div>
             <div class="d-grid mt-2 mb-5 button-auth">
                 <button class="btn-auth text-uppercase" type="button"><i class="fas fa-arrow-circle-right"></i>

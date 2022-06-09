@@ -52,7 +52,7 @@ $route->dispatch();
 
 /**
  * ERROR REDIRECT
- * Faz o controlo caso o $route->dispatch(); não consiga entregar uma rota par o usuário
+ * Faz o controlo caso o $route->dispatch(); não consiga entregar uma rota solicitada
  */
 if ($route->error()) {
     $route->redirect("/ops/{$route->error()}");
