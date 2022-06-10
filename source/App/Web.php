@@ -30,11 +30,11 @@ class Web extends Controller
         }
 
         if (!empty($data['csrf'])) {
-            if (!csrf_verify($data)) {
-                $json['message'] = $this->message->error("Erro ao enviar, favor use o formulário")->render();
-                echo json_encode($json);
-                return;
-            }
+//            if (!csrf_verify($data)) {
+//                $json['message'] = $this->message->error("Erro ao enviar, favor use o formulário")->render();
+//                echo json_encode($json);
+//                return;
+//            }
 
             if (request_limit("weblogin", 3, 60 * 5)) {
                 $json['message'] = $this->message->error("Você já efetuou 3 tentativas, esse é o limite. Por favor, aguarde 5 minutos para tentar novamente!")->render();
@@ -72,7 +72,8 @@ class Web extends Controller
 
         echo $this->view->render("auth-login", [
             "head" => $head,
-            "cookie" => filter_input(INPUT_COOKIE, "authEmail")
+            "cookie" => filter_input(INPUT_COOKIE, "authEmail"),
+            "mtAuthOrForget" => request_uri()
         ]);
     }
 
@@ -89,7 +90,8 @@ class Web extends Controller
         );
 
         echo $this->view->render("auth-forget", [
-            "head" => $head
+            "head" => $head,
+            "mtAuthOrForget" => request_uri()
         ]);
     }
 

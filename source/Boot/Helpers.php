@@ -113,6 +113,24 @@ function redirect(string $url): void
 }
 
 /**
+ * @return string|null
+ */
+function request_uri(): ?string
+{
+    $uri = $_SERVER["REQUEST_URI"];
+    $style = null;
+    if (!empty($uri)) {
+        if ($uri == "/sgfp/") {
+            $style = "mt-sgfp-auth";
+        }
+        if ($uri == "/sgfp/recuperar") {
+            $style = "mt-sgfp-forget";
+        }
+    }
+    return $style;
+}
+
+/**
  * ####################
  * ###   PASSWORD   ###
  * ####################
@@ -221,6 +239,10 @@ function request_limit(string $key, int $limit = 5, int $seconds = 60): bool
     return false;
 }
 
+/**
+ * @param string $month
+ * @return string
+ */
 function months(string $month): string
 {
     switch ($month) {
@@ -273,6 +295,9 @@ function months(string $month): string
     return $month;
 }
 
+/**
+ * @return string
+ */
 function date_fmt_mz(): string
 {
     $date = "Hoje: " . date('d') . " de " . months(date('m')) . " de " . date('Y');

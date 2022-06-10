@@ -25,7 +25,7 @@
     </div>
 </main>
 
-<footer>
+<footer class="<?= $mtAuthOrForget ?? '' ?>">
     <div class="d-flex flex-column text-center text-md-start justify-content-between py-4 px-4 px-xl-5
     footer-block fixed-bottom">
         <!-- Copyright -->

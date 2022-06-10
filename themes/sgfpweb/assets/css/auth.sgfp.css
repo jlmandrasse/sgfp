@@ -99,9 +99,14 @@
 .transition {
     transition-duration: var(--hover-duration);
 }
-
 .radius {
     -webkit-border-radius: var(--radius-normal);
     -moz-border-radius: var(--radius-normal);
     border-radius: var(--radius-normal);
+}
+.sgfp-rd-income {
+    color: var(--color-sgfp-income);
+}
+.sgfp-rd-payment {
+    color: var(--color-sgfp-payment);
 }

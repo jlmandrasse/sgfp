@@ -21,6 +21,8 @@ body {
     --color-blue: #39AED9;
     --color-yellow: #F5B946;
     --color-red: #D94352;
+    --color-sgfp-income: #030;
+    --color-sgfp-payment: #C00;
 
     --weight-bold: 700;
     --weight-light: 300;
@@ -46,7 +48,19 @@ body {
 }
 
 .justify-center {
-    margin: 0 16vh;
+    margin: 0 19vh;
+}
+
+.ml-sgfp-forget {
+    margin-left: 31.4vh
+}
+
+.mt-sgfp-auth {
+    margin-top: 18pc;
+}
+
+.mt-sgfp-forget {
+    margin-top: 11.5pc;
 }
 
 /*DEFAULT LOAD*/
