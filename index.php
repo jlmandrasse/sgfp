@@ -39,6 +39,12 @@ $route->get("/", "Dash:dash");
 $route->get("/dash/home", "Dash:home");
 $route->get("/logoff", "Dash:logoff");
 
+//category
+$route->post("/create-category", "Category:create");
+
+//launch
+$route->post("/create-launch", "Launch:create");
+
 /**
  * ERROR ROUTES
  */

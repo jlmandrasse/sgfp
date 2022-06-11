@@ -3,6 +3,7 @@
 namespace Source\App\Admin;
 
 use Source\Models\Auth;
+use Source\Models\Sgfp\Categories;
 
 /**
  * Class Dash
@@ -44,7 +45,8 @@ class Dash extends Admin
             "app" => "dash",
             "head" => $head,
             "userName" => $this->user->name,
-            "date" => date_fmt_mz()
+            "date" => date_fmt_mz(),
+            "categories" => (new Categories())->find()->fetch(true)
         ]);
     }
 

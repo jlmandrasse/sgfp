@@ -16,6 +16,8 @@
             </button>
         </div>
 
+        <div class="ajax_response mt-2"> <?= flash(); ?> </div>
+
         <div class="card text-center my-1">
             <div class="card-header">
                 <span class="float-start">Featured</span>
@@ -111,16 +113,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form class="auth_form" action="<?= url("/admin/create-category"); ?>" method="post">
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Nova Categoria:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <label for="name" class="col-form-label fw-bold">Nova Categoria:</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="modal-footer mt-4">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button class="btn btn-primary">Salvar</button>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Salvar</button>
                 </div>
             </div>
         </div>
@@ -134,7 +136,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form class="auth_form" action="<?= url("/admin/create-launch"); ?>" method="post">
                         <div class="mb-3">
                             <label for="date" class="col-form-label fw-bold">Data:</label>
                             <input type="date" class="form-control" id="date" name="date">
@@ -149,12 +151,11 @@
                             </label>
                         </div>
                         <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label fw-bold">Data:</label>
-                            <select class="form-control form-select" aria-label="Default select example">
-                                <option selected>Selecionar categoria</option>
-                                <?php for ($i = 2022; $i <= 2030; $i++): ?>
-                                    <option value="1"><?= $i ?></option>
-                                <?php endfor; ?>
+                            <label for="categories_id" class="col-form-label fw-bold">Categoria:</label>
+                            <select class="form-control form-select" id="categories_id" name="categories_id">
+                                <?php foreach ($categories as $category): ?>
+                                    <option value="<?= $category->id ?>"><?= $category->name ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -165,11 +166,11 @@
                             <label for="money" class="col-form-label fw-bold">Valor:</label>
                             <input type="text" class="form-control" id="money" name="money">
                         </div>
+                        <div class="modal-footer mt-4">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button class="btn btn-primary">Salvar</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Salvar</button>
                 </div>
             </div>
         </div>
