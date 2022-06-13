@@ -300,6 +300,16 @@ function months(string $month): string
  */
 function date_fmt_mz(): string
 {
-    $date = "Hoje: " . date('d') . " de " . months(date('m')) . " de " . date('Y');
+    $date = "Hoje: " . date('d') . " de " . months(date('m')) . " de " .
+        date('Y') . " - " . date("H\hi");
     return $date;
+}
+
+/**
+ * @param string $amount
+ * @return string
+ */
+function str_amount(?string $amount): string
+{
+    return number_format((!empty($amount) ? $amount : 0), 2, ",", ".") . CONF_CURRENCY;
 }

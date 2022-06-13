@@ -110,3 +110,11 @@
 .sgfp-rd-payment {
     color: var(--color-sgfp-payment);
 }
+
+.main {
+    padding-top: 50px;
+}
+
+.logout:hover {
+    color: var(--color-sgfp-payment);
+}

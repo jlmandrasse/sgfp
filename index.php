@@ -44,6 +44,7 @@ $route->post("/create-category", "Category:create");
 
 //launch
 $route->post("/create-launch", "Launch:create");
+$route->post("/searchByYear", "Launch:search");
 
 /**
  * ERROR ROUTES

@@ -3,7 +3,8 @@ Options All -Indexes
 
 #https://stackoverflow.com/questions/25577981/font-from-origin-has-been-blocked-from-loading-by-cross-origin-resource-sharing
 #https://stackoverflow.com/questions/10636611/how-does-access-control-allow-origin-header-work/10636765#10636765
-#Header add Access-Control-Allow-Origin "*" Unsecure
+#Unsecure
+#Header add Access-Control-Allow-Origin "*"
 #Secure
 Header add Access-Control-Allow-Origin "http://localhost"
 

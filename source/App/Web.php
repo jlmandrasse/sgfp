@@ -30,14 +30,20 @@ class Web extends Controller
         }
 
         if (!empty($data['csrf'])) {
-//            if (!csrf_verify($data)) {
+//            if (!csrf_verify($data['csrf'])) {
 //                $json['message'] = $this->message->error("Erro ao enviar, favor use o formulário")->render();
 //                echo json_encode($json);
 //                return;
 //            }
 
-            if (request_limit("weblogin", 3, 60 * 5)) {
-                $json['message'] = $this->message->error("Você já efetuou 3 tentativas, esse é o limite. Por favor, aguarde 5 minutos para tentar novamente!")->render();
+//            if (request_limit("weblogin", 3, 60 * 5)) {
+//                $json['message'] = $this->message->error("Você já efetuou 3 tentativas, esse é o limite. Por favor, aguarde 5 minutos para tentar novamente!")->render();
+//                echo json_encode($json);
+//                return;
+//            }
+
+            if (request_limit("weblogin", 3, 10)) {
+                $json['message'] = $this->message->error("Você já efetuou 3 tentativas, esse é o limite. Por favor, aguarde 10 segundos para tentar novamente!")->render();
                 echo json_encode($json);
                 return;
             }
@@ -53,7 +59,7 @@ class Web extends Controller
             $login = $auth->login($data['email'], $data['password'], $save);
 
             if ($login) {
-                $this->message->success("Seja bem-vindo(a) de volta " . Auth::user()->first_name . "!")->flash();
+                $this->message->success("Seja bem-vindo(a) de volta " . Auth::user()->name . "!")->flash();
                 $json['redirect'] = url("/admin");
             } else {
                 $json['message'] = $auth->message()->before("Ooops! ")->render();

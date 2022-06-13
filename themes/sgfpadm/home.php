@@ -36,7 +36,16 @@
                                         <h4>Entradas:</h4>
                                     </div>
                                     <div class="col-md-6 float-end">
-                                        <h4>0,00MZN</h4>
+                                        <h4>
+                                            <?php
+                                            if (!empty($totalAmount)):
+                                                foreach ($totalAmount as $amount):
+                                                    $totalPerMonth = $amount->money;
+                                                endforeach;
+                                                echo str_amount($totalPerMonth);
+                                            endif;
+                                            ?>
+                                        </h4>
                                     </div>
                                 </div>
                                 <hr>
@@ -45,7 +54,16 @@
                                         <h4>Saídas:</h4>
                                     </div>
                                     <div class="col-md-6 float-end">
-                                        <h4>0,00MZN</h4>
+                                        <h4>
+                                            <?php
+                                            if (!empty($totalUsed)):
+                                                foreach ($totalUsed as $amount):
+                                                    $totalPerMonth = $amount->money;
+                                                endforeach;
+                                                echo str_amount($totalPerMonth);
+                                            endif;
+                                            ?>
+                                        </h4>
                                     </div>
                                 </div>
                                 <hr>
@@ -55,7 +73,16 @@
                                         <h4 class="fw-bold">Resultado:</h4>
                                     </div>
                                     <div class="col-md-6 float-end">
-                                        <h4 class="fw-bold">0,00MZN</h4>
+                                        <h4 class="fw-bold">
+                                            <?php
+                                            if (!empty($totalAmount)):
+                                                foreach ($totalAmount as $amount):
+                                                    $totalPerMonth = $amount->money;
+                                                endforeach;
+                                                echo str_amount($totalPerMonth);
+                                            endif;
+                                            ?>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +99,16 @@
                                         <h4>Entradas:</h4>
                                     </div>
                                     <div class="col-md-6 float-end">
-                                        <h4>0,00MZN</h4>
+                                        <h4>
+                                            <?php
+                                            if (!empty($totalAmount) || !empty($total)):
+                                                foreach ($totalAmount as $amount):
+                                                    $total += $amount->money;
+                                                endforeach;
+                                                echo str_amount($total);
+                                            endif;
+                                            ?>
+                                        </h4>
                                     </div>
                                 </div>
                                 <hr>
@@ -81,7 +117,7 @@
                                         <h4>Saídas:</h4>
                                     </div>
                                     <div class="col-md-6 float-end">
-                                        <h4>0,00MZN</h4>
+                                        <h4><?= str_amount('') ?></h4>
                                     </div>
                                 </div>
                                 <hr>
@@ -91,12 +127,45 @@
                                         <h4 class="fw-bold">Resultado:</h4>
                                     </div>
                                     <div class="col-md-6 float-end">
-                                        <h4 class="fw-bold">0,00MZN</h4>
+                                        <h4 class="fw-bold">
+                                            <h4 class="fw-bold">
+                                                <?php
+                                                if (!empty($totalUsed) || !empty($total)):
+                                                    foreach ($totalUsed as $amount):
+                                                        $total -= $amount->money;
+                                                    endforeach;
+                                                    echo str_amount($total);
+                                                endif;
+                                                ?>
+                                            </h4>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row align-items-md-stretch mt-4">
+                    <div class="col-md-6">
+                        Movimentos deste Mês
+                    </div>
+                    <div class="col-3">
+                        <label for="filter">Filtrar por categoria: </label>
+                    </div>
+                    <div class="col-2">
+                        <select name="filter" class="form-control form-select-sm" id="filter">
+                            <option value="all">Tudo</option>
+                            <?php if (!empty($categories)): foreach ($categories as $category): ?>
+                                <option value="<?= $category->id ?>"><?= $category->name ?></option>
+                            <?php endforeach; endif; ?>
+                        </select>
+                    </div>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-outline-primary btn-sm">Filtrar</button>
+                    </div>
+                </div>
+                <div class="container row mt-5">
+                    <hr>
                 </div>
             </div>
             <div class="card-footer text-muted">
@@ -112,7 +181,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Categoria</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body bg-sgfp-nav">
                     <form class="auth_form" action="<?= url("/admin/create-category"); ?>" method="post">
                         <div class="mb-3">
                             <label for="name" class="col-form-label fw-bold">Nova Categoria:</label>
@@ -135,7 +204,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Movimento</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body bg-sgfp-nav">
                     <form class="auth_form" action="<?= url("/admin/create-launch"); ?>" method="post">
                         <div class="mb-3">
                             <label for="date" class="col-form-label fw-bold">Data:</label>
@@ -185,7 +254,7 @@
             var year = date.getFullYear();
             if (month < 10) month = "0" + month;
             if (day < 10) day = "0" + day;
-            var today = year + "-" + day + "-" + month;
+            var today = year + "-" + month + "-" + day;
             $("#date").attr("value", today);
         });
     </script>

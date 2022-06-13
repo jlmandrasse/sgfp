@@ -28,6 +28,7 @@ define("CONF_SITE_DOMAIN", "com.mz");
  */
 define("CONF_DATE_MZ", "d/m/Y H:i:s");
 define("CONF_DATE_APP", "Y-m-d H:i:s");
+define("CONF_CURRENCY", "MZN");
 
 /**
  * PASSWORD

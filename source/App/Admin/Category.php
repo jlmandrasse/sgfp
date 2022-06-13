@@ -36,7 +36,7 @@ class Category extends Admin
             return;
         }
 
-        $this->message->error("Prencha o campo para continuar.")->flash();
+        $this->message->error("Prencha o campo nova categoria para continuar.")->flash();
         $json["redirect"] = url("/admin");
         echo json_encode($json);
         return;

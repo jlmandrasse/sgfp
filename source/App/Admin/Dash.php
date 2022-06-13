@@ -4,6 +4,7 @@ namespace Source\App\Admin;
 
 use Source\Models\Auth;
 use Source\Models\Sgfp\Categories;
+use Source\Models\Sgfp\Launches;
 
 /**
  * Class Dash
@@ -46,7 +47,10 @@ class Dash extends Admin
             "head" => $head,
             "userName" => $this->user->name,
             "date" => date_fmt_mz(),
-            "categories" => (new Categories())->find()->fetch(true)
+            "categories" => (new Categories())->find()->fetch(true),
+            "totalAmount" => (new Launches())->find("type = :type", "type=1")->fetch(true),
+            "totalUsed" => (new Launches())->find("type = :type", "type=0")->fetch(true),
+            "total" => 0
         ]);
     }
 

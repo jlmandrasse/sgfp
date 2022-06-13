@@ -18,20 +18,26 @@
     </div>
 </div>
 
-<nav class="py-2 bg-sgfp border-bottom sticky-top">
+<nav class="py-2 bg-sgfp-nav border-bottom">
     <div class="container d-flex flex-wrap">
         <ul class="nav me-auto">
             <li class="nav-item">
-                <a href="<?= url("/admin") ?>" class="nav-link link-dark px-2 text-white fw-bold active"
+                <a href="<?= url("/admin") ?>" class="nav-link link-dark px-2 fw-bold active fs-3"
                    aria-current="page">
                     Gestão de Finanças
                 </a>
             </li>
         </ul>
         <ul class="nav">
-            <li class="nav-item">
-                <a href="#" class="nav-link link-dark px-2 text-white fw-bolder">
+            <li class="nav-item mt-3">
+                <p class="nav-link link-dark px-2 fw-bolder">
                     <?= $date ?>
+                </p>
+            </li>
+            <li class="nav-item mt-3">
+                <a href="<?= url("/admin/logoff") ?>"
+                   class="nav-link px-2 fw-bolder text-decoration-none float-end sgfp-rd-payment font-size logout">
+                    <i class="fas fa-arrow-right-from-bracket sgfp-rd-payment"></i> Sair
                 </a>
             </li>
         </ul>
@@ -47,10 +53,10 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-center">
                 <form>
                     <div class="form-group">
-                        <select class="form-control form-select-sm" aria-label="Default select example">
+                        <select onchange="getByYear(this.value)" class="form-control form-select-sm" aria-label="Default select example">
                             <option selected>Selecionar ano</option>
                             <?php for ($i = 2022; $i <= 2030; $i++): ?>
-                                <option value="1"><?= $i ?></option>
+                                <option value="<?= $i ?>"><?= $i ?></option>
                             <?php endfor; ?>
                         </select>
                     </div>
@@ -67,13 +73,14 @@
 </header>
 
 <!--CONTENT-->
-<main class="vh-100">
+<!--<main class="vh-100">-->
+<main class="main">
     <div class="container-fluid h-custom">
         <?= $v->section("content"); ?>
     </div>
 </main>
 
-<footer>
+<footer class="mt-3">
     <div class="d-flex flex-column text-center text-md-start justify-content-between py-4 px-4 px-xl-5
     footer-block bg-sgfp">
         <!-- Copyright -->
@@ -92,6 +99,7 @@
 </footer>
 
 <script src="<?= theme("/assets/scripts.js"); ?>"></script>
+<script src="<?= theme("/assets/js/script.js", CONF_VIEW_ADMIN); ?>"></script>
 <?= $v->section("scripts"); ?>
 
 </body>

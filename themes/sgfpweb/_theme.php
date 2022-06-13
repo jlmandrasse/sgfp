@@ -19,8 +19,9 @@
 </div>
 
 <!--CONTENT-->
-<main class="vh-100">
-    <div class="container-fluid h-custom">
+<!--<main class="vh-100">-->
+<main class="main mt-5">
+    <div class="container h-custom">
         <?= $v->section("content"); ?>
     </div>
 </main>

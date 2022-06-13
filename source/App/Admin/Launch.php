@@ -30,10 +30,10 @@ class Launch extends Admin
             $launch = new Launches();
             $launch->categories_id = $data["categories_id"];
             $launch->type = $data["type"];
-            $date = explode("/", $data["date"]);
-            $launch->day = $date[0];
+            $date = explode("-", $data["date"]);
+            $launch->day = $date[2];
             $launch->month = $date[1];
-            $launch->year = $date[2];
+            $launch->year = $date[0];
             $launch->description = $data["description"];
             $launch->money = $data["money"];
 
