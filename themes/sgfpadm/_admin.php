@@ -8,6 +8,7 @@
 
     <link rel="icon" type="image/png" href="<?= theme("/assets/images/sgfp.png"); ?>"/>
     <link rel="stylesheet" href="<?= theme("/assets/style.css"); ?>"/>
+    <link rel="stylesheet" href="<?= theme("/assets/css/style.css", CONF_VIEW_ADMIN); ?>"/>
 </head>
 <body>
 
@@ -24,15 +25,17 @@
             <li class="nav-item">
                 <a href="<?= url("/admin") ?>" class="nav-link link-dark px-2 fw-bold active fs-3"
                    aria-current="page">
-                    Gestão de Finanças
+                    <img src="<?= theme("/assets/images/sgfp.png"); ?>" alt="" height="40"
+                         width="40" title="<?= CONF_SITE_NAME ?>"> Gestão de Finanças
                 </a>
             </li>
         </ul>
         <ul class="nav">
             <li class="nav-item mt-3">
-                <p class="nav-link link-dark px-2 fw-bolder">
+                <a href="?month=<?= date("m") ?>&year=<?= date("Y") ?>"
+                   class="nav-link link-dark px-2 fw-bolder">
                     <?= $date ?>
-                </p>
+                </a>
             </li>
             <li class="nav-item mt-3">
                 <a href="<?= url("/admin/logoff") ?>"
@@ -51,20 +54,26 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-center">
-                <form>
-                    <div class="form-group">
-                        <select onchange="getByYear(this.value)" class="form-control form-select-sm" aria-label="Default select example">
-                            <option selected>Selecionar ano</option>
-                            <?php for ($i = 2022; $i <= 2030; $i++): ?>
-                                <option value="<?= $i ?>"><?= $i ?></option>
+                <form class="sgfp-mr-3">
+                    <div class="form-group mt-1">
+                        <select onchange="location.replace('?month=<?= $requested->month ?>&year='+this.value)"
+                                class="form-control form-select-sm" aria-label="Default select example">
+                            <?php for ($year = 2022; $year <= 2030; $year++): ?>
+                                <option value="<?= $year ?>"
+                                        <?= ($year == $requested->year ? "selected=selected" : "") ?>>
+                                    <?= $year ?>
+                                </option>
                             <?php endfor; ?>
                         </select>
                     </div>
                 </form>
                 <?php for ($month = 1; $month <= 12; $month++): ?>
                     <li class="nav-item">
-                        <a class="nav-link active text-white" aria-current="page"
-                           href="?month=<?= $month ?>&year=<?= date('Y') ?>"><?= months($month) ?></a>
+                        <a class="nav-link active <?= ($requested->month == $month ? 'bg-month' :
+                            'text-white bg-month-else') ?>" aria-current="page"
+                           href="?month=<?= $month ?>&year=<?= $requested->year ?>">
+                            <?= months($month) ?>
+                        </a>
                     </li>
                 <?php endfor; ?>
             </ul>
@@ -99,7 +108,6 @@
 </footer>
 
 <script src="<?= theme("/assets/scripts.js"); ?>"></script>
-<script src="<?= theme("/assets/js/script.js", CONF_VIEW_ADMIN); ?>"></script>
 <?= $v->section("scripts"); ?>
 
 </body>

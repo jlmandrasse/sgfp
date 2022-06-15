@@ -20,8 +20,10 @@
 
         <div class="card text-center my-1">
             <div class="card-header">
-                <span class="float-start">Featured</span>
-                <span class="float-end">Junho de 2022</span>
+                <span class="float-start fw-bold">SGFP</span>
+                <span class="float-end">
+                    <?= months($requested->month) . "/" . $requested->year ?>
+                </span>
             </div>
             <div class="card-body">
                 <div class="row align-items-md-stretch">
@@ -128,16 +130,14 @@
                                     </div>
                                     <div class="col-md-6 float-end">
                                         <h4 class="fw-bold">
-                                            <h4 class="fw-bold">
-                                                <?php
-                                                if (!empty($totalUsed) || !empty($total)):
-                                                    foreach ($totalUsed as $amount):
-                                                        $total -= $amount->money;
-                                                    endforeach;
-                                                    echo str_amount($total);
-                                                endif;
-                                                ?>
-                                            </h4>
+                                            <?php
+                                            if (!empty($totalUsed) || !empty($total)):
+                                                foreach ($totalUsed as $amount):
+                                                    $total -= $amount->money;
+                                                endforeach;
+                                                echo str_amount($total);
+                                            endif;
+                                            ?>
                                         </h4>
                                     </div>
                                 </div>

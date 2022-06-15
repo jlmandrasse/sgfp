@@ -42,6 +42,15 @@ class Dash extends Admin
             false
         );
 
+        $monthOrYear = new \stdClass();
+        if (!empty($_REQUEST["month"])) {
+            $monthOrYear->month = $_REQUEST["month"];
+            $monthOrYear->year = $_REQUEST["year"];
+        } else {
+            $monthOrYear->month = date('m');
+            $monthOrYear->year = date('Y');
+        }
+
         echo $this->view->render("home", [
             "app" => "dash",
             "head" => $head,
@@ -50,7 +59,8 @@ class Dash extends Admin
             "categories" => (new Categories())->find()->fetch(true),
             "totalAmount" => (new Launches())->find("type = :type", "type=1")->fetch(true),
             "totalUsed" => (new Launches())->find("type = :type", "type=0")->fetch(true),
-            "total" => 0
+            "total" => 0,
+            "requested" => $monthOrYear
         ]);
     }
 

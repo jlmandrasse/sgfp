@@ -1,0 +1,18 @@
+.sgfp-mr-3 {
+    margin-right: 3px;
+}
+
+.bg-month {
+    color: #000000;
+    margin-top: 4.3px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #FBFBFB;
+    border-radius: 4px;
+    padding: 3.5px;
+}
+
+.bg-month-else {
+    color: #FFF;
+    font-size: 16px;
+}
