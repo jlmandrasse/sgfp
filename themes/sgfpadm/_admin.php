@@ -108,6 +108,7 @@
 </footer>
 
 <script src="<?= theme("/assets/scripts.js"); ?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
 <?= $v->section("scripts"); ?>
 
 </body>

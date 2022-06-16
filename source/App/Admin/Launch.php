@@ -24,7 +24,7 @@ class Launch extends Admin
      */
     public function create(?array $data): void
     {
-        if (!empty($data["categories_id"]) || !empty($data["money"])) {
+        if (!empty($data["categories_id"]) && !empty($data["money"])) {
             $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
 
             $launch = new Launches();
@@ -49,7 +49,7 @@ class Launch extends Admin
             return;
         }
 
-        $this->message->error("Prencha o campo para continuar.")->flash();
+        $this->message->error("Prencha todos os campos para continuar.")->flash();
         $json["redirect"] = url("/admin");
         echo json_encode($json);
         return;

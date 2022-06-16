@@ -41,6 +41,8 @@ $route->get("/logoff", "Dash:logoff");
 
 //category
 $route->post("/create-category", "Category:create");
+$route->post("/read-category", "Category:read");
+$route->post("/update-category", "Category:update");
 
 //launch
 $route->post("/create-launch", "Launch:create");
