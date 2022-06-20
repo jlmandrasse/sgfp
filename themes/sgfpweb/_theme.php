@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" href="<?= theme("/assets/images/sgfp.png"); ?>"/>
     <link rel="stylesheet" href="<?= theme("/assets/style.css"); ?>"/>
 </head>
-<body>
+<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
 
 <div class="ajax_load">
     <div class="ajax_load_box">

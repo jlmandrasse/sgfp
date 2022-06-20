@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<?= theme("/assets/style.css"); ?>"/>
     <link rel="stylesheet" href="<?= theme("/assets/css/style.css", CONF_VIEW_ADMIN); ?>"/>
 </head>
-<body>
+<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
 
 <div class="ajax_load">
     <div class="ajax_load_box">
@@ -46,6 +46,7 @@
         </ul>
     </div>
 </nav>
+
 <header class="navbar navbar-expand-lg bg-sgfp-nav-content sticky-top">
     <div class="container-fluid d-inline">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
