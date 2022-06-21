@@ -49,16 +49,7 @@
                                             <h4>Entradas:</h4>
                                         </div>
                                         <div class="col-md-6 float-end">
-                                            <h4>
-                                                <?php
-                                                if (!empty($totalAmount)):
-                                                    foreach ($totalAmount as $amount):
-                                                        $totalPerMonth = $amount->money;
-                                                    endforeach;
-                                                    echo str_amount($totalPerMonth);
-                                                endif;
-                                                ?>
-                                            </h4>
+                                            <h4><?= (str_amount($totalGateway->total) ?? 0) ?></h4>
                                         </div>
                                     </div>
                                     <hr>
@@ -67,16 +58,7 @@
                                             <h4>Saídas:</h4>
                                         </div>
                                         <div class="col-md-6 float-end">
-                                            <h4>
-                                                <?php
-                                                if (!empty($totalUsed)):
-                                                    foreach ($totalUsed as $amount):
-                                                        $totalPerMonth = $amount->money;
-                                                    endforeach;
-                                                    echo str_amount($totalPerMonth);
-                                                endif;
-                                                ?>
-                                            </h4>
+                                            <h4><?= (str_amount($totalExit->total) ?? 0) ?></h4>
                                         </div>
                                     </div>
                                     <hr>
@@ -87,14 +69,7 @@
                                         </div>
                                         <div class="col-md-6 float-end">
                                             <h4 class="fw-bold">
-                                                <?php
-                                                if (!empty($totalAmount)):
-                                                    foreach ($totalAmount as $amount):
-                                                        $totalPerMonth = $amount->money;
-                                                    endforeach;
-                                                    echo str_amount($totalPerMonth);
-                                                endif;
-                                                ?>
+                                                <?= (str_amount($result) ?? 0) ?>
                                             </h4>
                                         </div>
                                     </div>
@@ -112,16 +87,7 @@
                                             <h4>Entradas:</h4>
                                         </div>
                                         <div class="col-md-6 float-end">
-                                            <h4>
-                                                <?php
-                                                if (!empty($totalAmount) || !empty($total)):
-                                                    foreach ($totalAmount as $amount):
-                                                        $total += $amount->money;
-                                                    endforeach;
-                                                    echo str_amount($total);
-                                                endif;
-                                                ?>
-                                            </h4>
+                                            <h4><?= (str_amount($generalGateway->total) ?? 0) ?></h4>
                                         </div>
                                     </div>
                                     <hr>
@@ -130,7 +96,7 @@
                                             <h4>Saídas:</h4>
                                         </div>
                                         <div class="col-md-6 float-end">
-                                            <h4><?= str_amount('') ?></h4>
+                                            <h4><?= (str_amount($generalExit->total) ?? 0) ?></h4>
                                         </div>
                                     </div>
                                     <hr>
@@ -141,14 +107,7 @@
                                         </div>
                                         <div class="col-md-6 float-end">
                                             <h4 class="fw-bold">
-                                                <?php
-                                                if (!empty($totalUsed) || !empty($total)):
-                                                    foreach ($totalUsed as $amount):
-                                                        $total -= $amount->money;
-                                                    endforeach;
-                                                    echo str_amount($total);
-                                                endif;
-                                                ?>
+                                                <?= (str_amount($totalResult) ?? 0) ?>
                                             </h4>
                                         </div>
                                     </div>
@@ -157,7 +116,7 @@
                         </div>
                     </div>
                     <div class="row align-items-md-stretch mt-4">
-                        <div class="col-md-6">
+                        <div class="col-md-6 fw-bold">
                             Movimentos deste Mês
                         </div>
                         <div class="col-3">
@@ -182,83 +141,87 @@
                 <div class="edit-category d-none">
                     <h3 class="fw-bold">Lista de Categorias</h3>
                     <hr>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Data e hora de criação</th>
-                            <th scope="col">Data da última atualização</th>
-                            <th scope="col">Ações</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($categories as $key => $category): ?>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
                             <tr>
-                                <th scope="row"><?= $key + 1 ?></th>
-                                <td><?= $category->name ?></td>
-                                <td><?= $category->created_at ?></td>
-                                <td><?= $category->updated_at ?></td>
-                                <td colspan="2">
-                                    <button data-route="<?= url("/admin/read-category") ?>"
-                                            class="btn btn-outline-primary btn-sm read-category m-category"
-                                            data-id="<?= $category->id ?>">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button data-route="<?= url("/admin/read-category") ?>"
-                                            class="btn btn-outline-danger btn-sm read-category"
-                                            data-delete="delete" data-id="<?= $category->id ?>">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Data e hora de criação</th>
+                                <th scope="col">Data da última atualização</th>
+                                <th scope="col">Ações</th>
                             </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($categories as $key => $category): ?>
+                                <tr>
+                                    <th scope="row"><?= $key + 1 ?></th>
+                                    <td><?= $category->name ?></td>
+                                    <td><?= $category->created_at ?></td>
+                                    <td><?= $category->updated_at ?></td>
+                                    <td colspan="2">
+                                        <button data-route="<?= url("/admin/read-category") ?>"
+                                                class="btn btn-outline-primary btn-sm read-category m-category"
+                                                data-id="<?= $category->id ?>">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button data-route="<?= url("/admin/read-category") ?>"
+                                                class="btn btn-outline-danger btn-sm read-category"
+                                                data-delete="delete" data-id="<?= $category->id ?>">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="edit-launch d-none">
                     <h3 class="fw-bold">Lista de Lançamentos</h3>
                     <hr>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Categoria</th>
-                            <th scope="col">Descrição</th>
-                            <th scope="col">Montante</th>
-                            <th scope="col">Data e hora de criação</th>
-                            <th scope="col">Data da última atualização</th>
-                            <th scope="col">Ações</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($launches as $key => $launch): ?>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
                             <tr>
-                                <th scope="row"><?= $key + 1 ?></th>
-                                <td><?= $launch->type ?></td>
-                                <td><?= $launch->category ?></td>
-                                <td><?= $launch->description ?></td>
-                                <td><?= $launch->amount ?></td>
-                                <td><?= $launch->created_at ?></td>
-                                <td><?= $launch->updated_at ?></td>
-                                <td colspan="2">
-                                    <button data-route="<?= url("/admin/read-launch") ?>"
-                                            class="btn btn-outline-primary btn-sm read-launch m-category"
-                                            data-id="<?= $launch->id ?>">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button data-route="<?= url("/admin/read-launch") ?>"
-                                            class="btn btn-outline-danger btn-sm read-launch"
-                                            data-delete="delete" data-id="<?= $launch->id ?>">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
+                                <th scope="col">#</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Montante</th>
+                                <th scope="col">Data e hora de criação</th>
+                                <th scope="col">Data da última atualização</th>
+                                <th scope="col">Ações</th>
                             </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($launches as $key => $launch): ?>
+                                <tr>
+                                    <th scope="row"><?= $key + 1 ?></th>
+                                    <td><?= $launch->type ?></td>
+                                    <td><?= $launch->category ?></td>
+                                    <td><?= $launch->description ?></td>
+                                    <td><?= $launch->amount ?></td>
+                                    <td><?= $launch->created_at ?></td>
+                                    <td><?= $launch->updated_at ?></td>
+                                    <td colspan="2">
+                                        <button data-route="<?= url("/admin/read-launch") ?>"
+                                                class="btn btn-outline-primary btn-sm read-launch m-category"
+                                                data-id="<?= $launch->id ?>">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button data-route="<?= url("/admin/read-launch") ?>"
+                                                class="btn btn-outline-danger btn-sm read-launch"
+                                                data-delete="delete" data-id="<?= $launch->id ?>">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="card-footer text-muted">
@@ -276,7 +239,7 @@
                 </div>
                 <div class="modal-body bg-sgfp-nav">
                     <form class="auth_form" action="<?= url("/admin/create-category"); ?>" method="post"
-                    autocomplete="off">
+                          autocomplete="off">
                         <div class="mb-3">
                             <label for="name" class="col-form-label fw-bold">Nova Categoria:</label>
                             <input type="text" class="form-control" id="name" name="name">
@@ -300,7 +263,7 @@
                 </div>
                 <div class="modal-body bg-sgfp-nav">
                     <form class="auth_form" action="<?= url("/admin/update-category"); ?>" method="post"
-                    autocomplete="off">
+                          autocomplete="off">
                         <div class="mb-3 d-none">
                             <label for="categoryId" class="col-form-label fw-bold">Id da categoria:</label>
                             <input type="text" class="form-control" id="categoryId" name="id">
@@ -363,7 +326,7 @@
                 </div>
                 <div class="modal-body bg-sgfp-nav">
                     <form class="auth_form" action="<?= url("/admin/create-launch"); ?>" method="post"
-                    autocomplete="off">
+                          autocomplete="off">
                         <div class="mb-3">
                             <label for="date" class="col-form-label fw-bold">Data:</label>
                             <input type="date" class="form-control" id="date" name="date">
