@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2022 at 06:14 PM
+-- Generation Time: Jun 21, 2022 at 11:10 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -40,7 +40,8 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'Salário', '2022-06-10 23:35:58', '2022-06-17 08:20:45'),
-(2, 'Gastos', '2022-06-13 14:41:49', '2022-06-16 23:26:11');
+(2, 'Gastos', '2022-06-13 14:41:49', '2022-06-16 23:26:11'),
+(4, 'Compras', '2022-06-21 15:41:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -53,7 +54,7 @@ CREATE TABLE `launches` (
   `categories_id` bigint(20) UNSIGNED NOT NULL,
   `types_id` int(11) DEFAULT NULL,
   `day` int(11) DEFAULT NULL,
-  `month` varchar(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `month` int(11) DEFAULT NULL,
   `year` int(11) DEFAULT NULL,
   `description` longtext CHARACTER SET utf8mb4 DEFAULT NULL,
   `money` double(8,2) DEFAULT NULL,
@@ -66,8 +67,11 @@ CREATE TABLE `launches` (
 --
 
 INSERT INTO `launches` (`id`, `categories_id`, `types_id`, `day`, `month`, `year`, `description`, `money`, `created_at`, `updated_at`) VALUES
-(2, 1, 1, 13, '06', 2022, 'Concurso', 100009.00, '2022-06-13 12:01:50', '2022-06-20 14:18:41'),
-(3, 2, 2, 13, '06', 2022, 'Internet', 1000.00, '2022-06-13 12:42:15', '2022-06-17 19:02:03');
+(2, 1, 1, 13, 6, 2022, 'Concurso', 10000.00, '2022-06-13 12:01:50', '2022-06-20 18:04:36'),
+(3, 2, 2, 13, 6, 2022, 'Internet', 1000.00, '2022-06-13 12:42:15', '2022-06-17 19:02:03'),
+(5, 4, 2, 21, 6, 2022, 'Energia', 100.00, '2022-06-21 15:44:48', NULL),
+(6, 1, 1, 21, 5, 2022, 'Mês de maio', 10000.00, '2022-06-21 20:41:52', NULL),
+(7, 4, 2, 21, 5, 2022, 'Compra de HDD Externo', 3000.00, '2022-06-21 20:43:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -170,13 +174,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `launches`
 --
 ALTER TABLE `launches`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `types`
