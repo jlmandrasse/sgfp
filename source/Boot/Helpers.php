@@ -313,3 +313,29 @@ function str_amount(?string $amount): string
 {
     return number_format((!empty($amount) ? $amount : 0), 2, ",", ".") . CONF_CURRENCY;
 }
+
+
+/**
+ * @param string $day
+ * @param string $month
+ * @return string
+ */
+function month_date(string $day, string $month): string
+{
+    if (strlen($month) != 1) {
+        return date("{$day}/{$month}");
+    }
+
+    return date("{$day}/0{$month}");
+}
+
+/**
+ * @param int $category_id
+ * @return object|null
+ */
+function category(int $category_id): ?object
+{
+    return (new \Source\Models\Sgfp\Categories())
+        ->find("id = :id", "id={$category_id}", "name")
+        ->fetch();
+}

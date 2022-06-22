@@ -119,23 +119,63 @@
                         <div class="col-md-6 fw-bold">
                             Movimentos deste Mês
                         </div>
-                        <div class="col-3">
-                            <label for="filter">Filtrar por categoria: </label>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3 pt-1">
+                            <label for="filter" class="float-end">Filtrar por categoria: </label>
                         </div>
-                        <div class="col-2">
-                            <select name="filter" class="form-control form-select-sm" id="filter">
-                                <option value="all">Tudo</option>
-                                <?php if (!empty($categories)): foreach ($categories as $category): ?>
-                                    <option value="<?= $category->id ?>"><?= $category->name ?></option>
-                                <?php endforeach; endif; ?>
-                            </select>
-                        </div>
-                        <div class="col-1">
-                            <button type="submit" class="btn btn-outline-primary btn-sm">Filtrar</button>
+                        <div class="col-md-2">
+                            <form name="form_filter">
+                                <select name="filter" class="form-control form-select-sm" id="filter" onchange="form_filter.submit()">
+                                    <option value="">Tudo</option>
+                                    <?php if (!empty($categories)): foreach ($categories as $category): ?>
+                                        <option <?= ($filter->category && $filter->category == $category->id ? "selected=selected" : '')?>
+                                         value="<?= $category->id ?>">
+                                            <?= $category->name ?></option>
+                                        <?php endforeach; endif; ?>
+                                </select>
+                            </form>
                         </div>
                     </div>
                     <div class="container row mt-5">
                         <hr>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <tbody>
+                                <?php foreach ($thisMonth as $value): ?>
+                                    <tr>
+                                        <td>
+                                            <span class="float-start">
+                                                <?= month_date($value->day, $value->month) ?>
+                                            </span>
+                                        </td>
+                                        <td><?= $value->description ?>
+                                            <em>
+                                                (<a href="?month=<?= $filter->month ?>&year=<?= $filter->year ?>&filter=<?= $value->categories_id ?>"
+                                                   class="text-decoration-none">
+                                                    <?= category($value->categories_id)->name ?>
+                                                </a>)
+                                            </em>
+                                        </td>
+                                        <td>
+                                            <strong class="<?= ($value->types_id == 1 ? 'sgfp-rd-income' : 'sgfp-rd-payment') ?> float-end">
+                                                <?= (
+                                                $value->types_id == 1 ?
+                                                    '+' . str_amount($value->money) :
+                                                    '-' . str_amount($value->money)
+                                                )
+                                                ?>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                            <div class="float-end">
+                                <h4 class="fw-bold float-end sgfp-rd-income">
+                                    <?= (str_amount($result) ?? 0) ?>
+                                </h4>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="edit-category d-none">
