@@ -117,7 +117,7 @@ function redirect(string $url): void
  */
 function request_uri(): ?string
 {
-    $uri = $_SERVER["REQUEST_URI"];
+    $uri = $_SERVER['REQUEST_URI'];
     $style = null;
     if (!empty($uri)) {
         if ($uri == "/sgfp/") {
@@ -125,6 +125,9 @@ function request_uri(): ?string
         }
         if ($uri == "/sgfp/recuperar") {
             $style = "mt-sgfp-forget";
+        }
+        if ($uri == "/sgfp/termos") {
+            $style = "mt-sgfp-terms";
         }
     }
     return $style;
@@ -240,6 +243,22 @@ function request_limit(string $key, int $limit = 5, int $seconds = 60): bool
 }
 
 /**
+ * @param string $field
+ * @param string $value
+ * @return bool
+ */
+function request_repeat(string $field, string $value): bool
+{
+    $session = new \Source\Core\Session();
+    if ($session->has($field) && $session->$field == $value) {
+        return true;
+    }
+
+    $session->set($field, $value);
+    return false;
+}
+
+/**
  * @param string $month
  * @return string
  */
@@ -337,5 +356,30 @@ function category(int $category_id): ?object
 {
     return (new \Source\Models\Sgfp\Categories())
         ->find("id = :id", "id={$category_id}", "name")
+        ->fetch();
+}
+
+/**
+ * @param int $type
+ * @param int $month
+ * @param int $year
+ * @return array|mixed|\Source\Core\Model|null
+ */
+function launchInOrOut(int $type, int $month, int $year)
+{
+    return (new \Source\Models\Sgfp\Launches())
+        ->find("types_id = :t AND month = :m AND year = :y", "t={$type}&m={$month}&y={$year}",
+            "SUM(money) as total")
+        ->fetch();
+}
+
+/**
+ * @param int $type
+ * @return array|mixed|\Source\Core\Model|null
+ */
+function launchGeneralInOrOut(int $type)
+{
+    return (new \Source\Models\Sgfp\Launches())
+        ->find("types_id = :t", "t={$type}", "SUM(money) as total")
         ->fetch();
 }

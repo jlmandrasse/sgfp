@@ -2,7 +2,7 @@
 
     <div class="container">
 
-        <div class="my-1 mt-5 fw-bold">
+        <div class="my-1 mt-3 fw-bold">
             <label class="m-1"> Categoria:
                 <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
                         data-bs-target="#createCategoryModal"
@@ -69,7 +69,7 @@
                                         </div>
                                         <div class="col-md-6 float-end">
                                             <h4 class="fw-bold">
-                                                <?= (str_amount($result) ?? 0) ?>
+                                                <?= (str_amount($totalThisMonth) ?? 0) ?>
                                             </h4>
                                         </div>
                                     </div>
@@ -125,13 +125,17 @@
                         </div>
                         <div class="col-md-2">
                             <form name="form_filter">
-                                <select name="filter" class="form-control form-select-sm" id="filter" onchange="form_filter.submit()">
+                                <input type="hidden" name="month" value="<?= $filter->month ?>">
+                                <input type="hidden" name="year" value="<?= $filter->year ?>">
+                                <select name="filter" class="form-control form-select-sm" id="filter"
+                                        onchange="form_filter.submit()">
                                     <option value="">Tudo</option>
                                     <?php if (!empty($categories)): foreach ($categories as $category): ?>
-                                        <option <?= ($filter->category && $filter->category == $category->id ? "selected=selected" : '')?>
-                                         value="<?= $category->id ?>">
+                                        <option
+                                            <?= ($filter->category && $filter->category == $category->id ? "selected=selected" : '') ?>
+                                            value="<?= $category->id ?>">
                                             <?= $category->name ?></option>
-                                        <?php endforeach; endif; ?>
+                                    <?php endforeach; endif; ?>
                                 </select>
                             </form>
                         </div>
@@ -141,7 +145,7 @@
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <tbody>
-                                <?php foreach ($thisMonth as $value): ?>
+                                <?php if (!empty($thisMonth)): foreach ($thisMonth as $value): ?>
                                     <tr>
                                         <td>
                                             <span class="float-start">
@@ -150,10 +154,9 @@
                                         </td>
                                         <td><?= $value->description ?>
                                             <em>
-                                                (<a href="?month=<?= $filter->month ?>&year=<?= $filter->year ?>&filter=<?= $value->categories_id ?>"
-                                                   class="text-decoration-none">
+                                                (<span class="text-primary">
                                                     <?= category($value->categories_id)->name ?>
-                                                </a>)
+                                                </span>)
                                             </em>
                                         </td>
                                         <td>
@@ -167,12 +170,22 @@
                                             </strong>
                                         </td>
                                     </tr>
-                                <?php endforeach; ?>
+                                <?php endforeach; endif; ?>
                                 </tbody>
                             </table>
                             <div class="float-end">
                                 <h4 class="fw-bold float-end sgfp-rd-income">
-                                    <?= (str_amount($result) ?? 0) ?>
+                                    <?php
+                                        if (!empty($thisMonth)):
+                                            if ($filter->count == 1):
+                                                echo '+' . (str_amount($totalFilter) ?? 0);
+                                            elseif ($filter->count == 2):
+                                                echo '<span class="sgfp-rd-payment"> -' . (str_amount($totalFilter) ?? 0) . '</span>';
+                                            else:
+                                                echo(str_amount($totalFilter) ?? 0);
+                                            endif;
+                                        endif;
+                                    ?>
                                 </h4>
                             </div>
                         </div>
@@ -263,9 +276,6 @@
                         </table>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer text-muted">
-                2 days ago
             </div>
         </div>
     </div>

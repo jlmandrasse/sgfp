@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url('font-family-montserrat.css');
 
 * {
@@ -24,10 +25,12 @@ body {
     --color-red: #D94352;
     --color-sgfp-income: #030;
     --color-sgfp-payment: #C00;
+    --color-default: #555555;
 
     --weight-bold: 700;
     --weight-light: 300;
     --weight-strong: 600;
+    --weight-black: 900;
 
     --gradient-green: linear-gradient(to right, #42E695 0%, #3BB2B8 50%, #42E695 100%);
 
@@ -66,6 +69,10 @@ body {
 
 .mt-sgfp-forget {
     margin-top: 3pc;
+}
+
+.mt-sgfp-terms {
+    margin-top: 10pc;
 }
 
 /*DEFAULT LOAD*/
@@ -167,4 +174,44 @@ body {
 
 .button-auth {
     padding-bottom: 80px;
+}
+
+/*TERMS PAGE*/
+.terms-page-header {
+    text-align: center;
+    padding: 50px 40px;
+    background: #1282b1;
+    background-size: 200%;
+    color: #ffffff;
+}
+
+.terms-page-header h1 {
+    font-size: 2em;
+    font-weight: var(--weight-bold);
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.terms-page-header p {
+    margin-top: 10px;
+    font-weight: var(--weight-black);
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.terms-page-content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 60px 0 0 0;
+}
+
+/*WYSH HTMLCHARS*/
+.htmlchars {
+    color: var(--color-default);
+}
+
+.htmlchars :first-child {
+    margin-top: 0;
+}
+
+.htmlchars p {
+    margin-top: 25px;
 }

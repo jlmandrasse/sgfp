@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2022 at 10:30 PM
+-- Generation Time: Jun 29, 2022 at 03:48 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -114,10 +114,9 @@ CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `level` int(11) NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `forget` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -126,8 +125,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `level`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Joel', 'jlmandrasse@gmail.com', NULL, '$2y$10$Er5QnV0lx0y3iLAAs1AFPughBp40DM/SuPTc8k5OHBVBCJafUUpNe', 5, NULL, '2022-05-18 23:41:42', '2022-06-13 11:12:57');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `level`, `forget`, `created_at`, `updated_at`) VALUES
+(1, 'Joel', 'jlmandrasse@gmail.com', '$2y$10$hjn80VSJNVUKxSmVd1bDg.EqDOIhiPikpFZFKRJjQVb3UlagqtBtS', 5, NULL, '2022-05-18 23:41:42', '2022-06-29 09:23:22');
 
 --
 -- Indexes for dumped tables
@@ -180,7 +179,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `launches`
 --
 ALTER TABLE `launches`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `types`

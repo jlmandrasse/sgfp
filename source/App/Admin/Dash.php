@@ -54,52 +54,66 @@ class Dash extends Admin
             $monthOrYear->year = date('Y');
         }
 
-        if (!empty($month) && !empty($year)) {
-            $gateway = (new Launches())
-                ->find("types_id = :t AND month = :m AND year = :y", "t=1&m={$month}&y={$year}",
-                    "SUM(money) as total")
-                ->fetch();
-
-            $exit = (new Launches())
-                ->find("types_id = :t AND month = :m AND year = :y", "t=2&m={$month}&y={$year}",
-                    "SUM(money) as total")
-                ->fetch();
-
-            $result = $gateway->total - $exit->total;
-
-        } else {
-            $month = date("m");
-            $year = date("Y");
-            $gateway = (new Launches())
-                ->find("types_id = :t AND month = :m AND year = :y", "t=1&m={$month}&y={$year}",
-                    "SUM(money) as total")
-                ->fetch();
-
-            $exit = (new Launches())
-                ->find("types_id = :t AND month = :m AND year = :y", "t=2&m={$month}&y={$year}",
-                    "SUM(money) as total")
-                ->fetch();
-
-            $result = $gateway->total - $exit->total;
+        if (!empty($month) || !empty($year)) {
+            $m = $month;
+            $y = $year;
         }
 
-        $generalGateway = (new Launches())
-            ->find("types_id = :t", "t=1", "SUM(money) as total")
-            ->fetch();
+        if (!empty($month) && !empty($year)) {
 
-        $generalExit = (new Launches())
-            ->find("types_id = :t", "t=2", "SUM(money) as total")
-            ->fetch();
-
-        if (!empty($filter)) {
-            $thisMonth = (new Launches())
-                ->find("categories_id = :fk", "fk={$filter}")
-                ->fetch(true);
+            $gateway = launchInOrOut(1, $m, $y);
+            $exit = launchInOrOut(2, $m, $y);
+            $totalThisMonth = $gateway->total - $exit->total;
         } else {
+
+            $gateway = launchInOrOut(1, date("m"), date("Y"));
+            $exit = launchInOrOut(2, date("m"), date("Y"));
+            $totalThisMonth = $gateway->total - $exit->total;
+        }
+
+        if (!empty($m)) {
+
+            $thisMonth = (new Launches())
+                ->find("month = :m AND year = :y", "m={$m}&y={$y}")
+                ->order("created_at DESC")
+                ->fetch(true);
+        }
+
+        if (empty($m)) {
+
+            $month = date("m");
+            $year = date("Y");
+
             $thisMonth = (new Launches())
                 ->find("month = :m AND year = :y", "m={$month}&y={$year}")
-                ->order("day")
+                ->order("created_at DESC")
                 ->fetch(true);
+        }
+
+        if (!empty($filter)) {
+
+            $month = (!empty($m) ? $m : date("m"));
+
+            $find = $filter;
+            $thisMonth = (new Launches())
+                ->find("categories_id = :fk AND month = :m", "fk={$find}&m={$month}")
+                ->fetch(true);
+            $sum = (new Launches())
+                ->find("categories_id = :fk AND month = :m", "fk={$find}&m={$month}", "types_id, SUM(money) as total")
+                ->fetch();
+            $totalFilter = $sum->total;
+
+        } elseif (empty($filter)) {
+            $thisMonth = (new Launches())
+                ->find("month = :m AND year = :y", "m={$month}&y={$year}")
+                ->fetch(true);
+            $sum = (new Launches())
+                ->find("month = :m AND year = :y AND types_id = :t", "m={$month}&y={$year}&t=1", "types_id, SUM(money) as total")
+                ->fetch();
+            $sub = (new Launches())
+                ->find("month = :m AND year = :y AND types_id = :t", "m={$month}&y={$year}&t=2", "types_id, SUM(money) as total")
+                ->fetch();
+            $totalFilter = $sum->total - $sub->total;
         }
 
         echo $this->view->render("home", [
@@ -129,17 +143,19 @@ class Dash extends Admin
             "filter" => (object)[
                 "month" => $month,
                 "year" => $year,
-                "category" => ($filter ?? 0)
+                "category" => (!empty($filter) ? $filter : 0),
+                "count" => ($sum->types_id ?? 0)
             ],
+            "totalFilter" => $totalFilter,
 
             "totalGateway" => $gateway,
             "totalExit" => $exit,
-            "result" => $result,
-            "generalGateway" => $generalGateway,
-            "generalExit" => $generalExit,
-            "totalResult" => ($generalGateway->total - $generalExit->total),
+            "totalThisMonth" => $totalThisMonth,
+            "generalGateway" => launchGeneralInOrOut(1),
+            "generalExit" => launchGeneralInOrOut(2),
+            "totalResult" => (launchGeneralInOrOut(1)->total - launchGeneralInOrOut(2)->total),
 
-            "thisMonth" => $thisMonth,
+            "thisMonth" => ($thisMonth ?? 0),
 
             "total" => 0,
             "requested" => $monthOrYear,

@@ -21,8 +21,11 @@ $route->namespace("Source\App");
 //auth
 $route->group(null);
 $route->get("/", "Web:login");
-$route->post("/", "Web:login");
+$route->post("/entrar", "Web:login");
 $route->get("/recuperar", "Web:forget");
+$route->post("/recuperar", "Web:forget");
+$route->get("/recuperar/{code}", "Web:reset");
+$route->post("/recuperar/resetar", "Web:reset");
 
 //services
 $route->group(null);

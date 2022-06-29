@@ -158,7 +158,7 @@ class Auth extends Model
 
         $view = new View(__DIR__ . "/../../shared/views/email");
         $message = $view->render("forget", [
-            "first_name" => $user->first_name,
+            "user_name" => $user->name,
             "forget_link" => url("/recuperar/{$user->email}|{$user->forget}")
         ]);
 
@@ -166,7 +166,7 @@ class Auth extends Model
             "Recupere sua senha no " . CONF_SITE_NAME,
             $message,
             $user->email,
-            "{$user->first_name} {$user->last_name}"
+            "{$user->name}"
         )->send();
 
         return true;

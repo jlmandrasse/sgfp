@@ -17,30 +17,7 @@ class User extends Model
      */
     public function __construct()
     {
-        parent::__construct("users", ["id"], ["first_name", "last_name", "email", "password"]);
-    }
-
-    /**
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $email
-     * @param string $password
-     * @param string|null $document
-     * @return User
-     */
-    public function bootstrap(
-        string $firstName,
-        string $lastName,
-        string $email,
-        string $password,
-        string $document = null
-    ): User {
-        $this->first_name = $firstName;
-        $this->last_name = $lastName;
-        $this->email = $email;
-        $this->password = $password;
-        $this->document = $document;
-        return $this;
+        parent::__construct("users", ["id"], ["name", "email", "password"]);
     }
 
     /**
@@ -52,14 +29,6 @@ class User extends Model
     {
         $find = $this->find("email = :email", "email={$email}", $columns);
         return $find->fetch();
-    }
-
-    /**
-     * @return string
-     */
-    public function fullName(): string
-    {
-        return "{$this->first_name} {$this->last_name}";
     }
 
     /**

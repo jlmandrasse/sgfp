@@ -4,19 +4,16 @@
     <div class="col-md-6 col-lg-6 col-xl-5">
         <img src="<?= theme("/assets/images/sgfp.png"); ?>" class="img-fluid" alt="Sample image">
     </div>
+
     <div class="col-md-6 col-lg-6 col-xl-4 offset-xl-1">
-        <form class="auth_form" action="<?= url("/"); ?>" method="post"
-              enctype="multipart/form-data" autocomplete="off">
-
-            <?= csrf_input(); ?>
-
+        <form class="auth_form" action="<?= url("/entrar"); ?>" method="post" enctype="multipart/form-data">
             <div class="divider d-flex align-items-center my-4">
-                <p class="text-center fw-bold mx-3 mb-0 sgfp-color"><?= CONF_SITE_NAME ?></p>
+                <p class="text-center fw-bold mx-3 mb-0 sgfp-color"><?= CONF_SITE_NAME; ?></p>
             </div>
 
-            <div class="ajax_response"> <?= flash(); ?> </div>
+            <div class="ajax_response"><?= flash(); ?></div>
+            <?= csrf_input(); ?>
 
-            <!-- Email input -->
             <div class="form-outline mb-4">
                 <label class="form-label fw-bold sgfp-color" for="email">
                     <i class="fas fa-envelope"></i> E-mail:
@@ -24,8 +21,6 @@
                 <input type="email" name="email" id="email" value="<?= ($cookie ?? null); ?>"
                        class="form-control form-control-lg" placeholder="Ex: jlmandrasse@gmail.com" required/>
             </div>
-
-            <!-- Password input -->
             <div class="form-outline mb-3">
                 <label class="form-label fw-bold sgfp-color" for="password">
                     <i class="fas fa-unlock"></i> Senha:
@@ -35,7 +30,6 @@
             </div>
 
             <div class="d-flex justify-content-between align-items-center">
-                <!-- Checkbox -->
                 <div class="form-check mb-0">
                     <input class="form-check-input me-2" type="checkbox" <?= (!empty($cookie) ? "checked" : ""); ?>
                            name="save" id="remember"/>
@@ -48,10 +42,9 @@
                 </a>
             </div>
             <div class="d-grid mt-2 mb-5 button-auth">
-                <button class="btn-auth text-uppercase"><i class="fas fa-arrow-circle-right"></i> Entrar</button>
-                <p hidden class="small fw-bold mt-2 pt-1 mb-0">Não tens uma conta?
-                    <a href="#!" class="link-danger">Registar</a>
-                </p>
+                <button class="btn-auth text-uppercase" type="submit">
+                    <i class="fas fa-arrow-circle-right"></i> Entrar
+                </button>
             </div>
         </form>
     </div>
